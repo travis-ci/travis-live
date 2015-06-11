@@ -21,6 +21,7 @@ if Travis.config.sentry.dsn
   end
 end
 
+p [:sidekiq_namespace, Travis.config.sidekiq.namespace]
 Sidekiq.configure_server do |config|
   config.redis = {
     :url       => Travis.config.redis.url,
