@@ -3,7 +3,6 @@ $:.unshift(File.expand_path('..', File.dirname(__FILE__)))
 require 'bundler/setup'
 require 'metriks/librato_metrics_reporter'
 require 'travis/live/error_handler'
-require 'travis/support'
 require 'travis/live/config'
 require 'travis/live/pusher/worker'
 require 'travis/live/middleware/metriks'
