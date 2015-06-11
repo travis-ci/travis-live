@@ -3,7 +3,7 @@ require 'pusher'
 
 module Travis
   def self.config
-    @config ||= Tasks::Config.load
+    @config ||= Live::Config.load
   end
 
   def self.pusher

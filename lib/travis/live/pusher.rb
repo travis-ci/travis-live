@@ -1,4 +1,4 @@
-$:.unshift(File.expand_path('..', File.dirname(__FILE__)))
+$:.unshift(File.expand_path('../..', File.dirname(__FILE__)))
 
 require 'bundler/setup'
 require 'metriks/librato_metrics_reporter'
@@ -8,6 +8,34 @@ require 'travis/live/pusher/worker'
 require 'travis/live/middleware/metriks'
 require 'travis/live/middleware/logging'
 require 'unlimited-jce-policy-jdk7'
+require 'travis/support/exceptions'
+require 'travis/support/logging'
+require 'travis/support/logger'
+require 'travis/support/metrics'
+
+module Travis
+  class << self
+    def env
+     ENV['ENV'] || ENV['RAILS_ENV'] || ENV['RACK_ENV'] || 'development'
+    end
+
+    def logger
+      @logger ||= Logger.configure(Logger.new(STDOUT))
+    end
+
+    def logger=(logger)
+      @logger = Logger.configure(logger)
+    end
+
+    def uuid=(uuid)
+      Thread.current[:uuid] = uuid
+    end
+
+    def uuid
+      Thread.current[:uuid] ||= SecureRandom.uuid
+    end
+  end
+end
 
 $stdout.sync = true
 
@@ -22,6 +50,7 @@ if Travis.config.sentry.dsn
 end
 
 p [:sidekiq_namespace, Travis.config.sidekiq.namespace]
+p [:redis_url, Travis.config.redis.url]
 Sidekiq.configure_server do |config|
   config.redis = {
     :url       => Travis.config.redis.url,
