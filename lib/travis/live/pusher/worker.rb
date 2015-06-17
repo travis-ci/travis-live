@@ -1,4 +1,5 @@
 require 'sidekiq'
+require 'travis/live/pusher/task'
 
 module Travis
   module Async
