@@ -30,7 +30,8 @@ module Travis
         end
 
         def channels
-          channels = private_channels? ? ["repo-#{repo_id}"] : ['common']
+          channels = ["repo-#{repo_id}"]
+          channels << "common" unless private_channels?
           channels.map { |channel| [channel_prefix, channels].compact.join('-') }
         end
 
