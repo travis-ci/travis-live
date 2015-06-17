@@ -153,6 +153,3 @@ DEPENDENCIES
   travis-support!
   unlimited-jce-policy-jdk7!
   webmock (~> 1.8.0)
-
-BUNDLED WITH
-   1.10.3
