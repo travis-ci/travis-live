@@ -32,7 +32,13 @@ module Travis
         end
 
         def log(data)
-          Travis.logger.info(data.map {|k, v| "#{k}=#{v}"}.join(" "))
+          line = "event=#{data['event']}"
+          line << " build=#{data['build']}" if data['build']
+          line << " job=#{data['job']}" if data['job']
+          line << " uuid=#{data['uuid']}"
+          line << " jid=#{data['jid']}"
+          line << " time=#{data['time']}" if data['time']
+          Travis.logger.info(line)
         end
       end
     end
