@@ -70,4 +70,4 @@ if Travis.config.sentry
   Travis::Exceptions::Reporter.start
 end
 
-Travis::Metrics.setup
+Travis::Metrics.setup(Travis.config.metrics.reporter)
