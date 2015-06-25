@@ -34,6 +34,16 @@ describe Travis::Live::Pusher::Task do
       task.channels.should == ["repo-16594", "common"]
     end
 
+    it 'disables common channel with disable_common_channel setting' do
+      begin
+        Travis.config.pusher.disable_common_channel = true
+        task = Travis::Live::Pusher::Task.new(payload, params)
+        task.channels.should == ["repo-16594"]
+      ensure
+        Travis.config.pusher.disable_common_channel = false
+      end
+    end
+
     it 'triggers a pusher event with the correct payload' do
       task = Travis::Live::Pusher::Task.new(payload, params)
       task.expects(:trigger).with("repo-16594", payload.deep_symbolize_keys)

@@ -31,7 +31,7 @@ module Travis
 
         def channels
           channels = ["repo-#{repo_id}"]
-          channels << "common" unless private_channels?
+          channels << "common" if public_channels? && !Travis.config.pusher.disable_common_channel?
           channels.map { |channel| [channel_prefix, channel].compact.join('-') }
         end
 
@@ -63,6 +63,10 @@ module Travis
 
           def private_channels?
             force_private_channels? || repository_private?
+          end
+
+          def public_channels?
+            !private_channels?
           end
 
           def force_private_channels?
