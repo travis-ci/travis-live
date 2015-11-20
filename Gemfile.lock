@@ -87,6 +87,8 @@ GEM
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     redis (3.2.2)
+    redis-namespace (1.5.2)
+      redis (~> 3.0, >= 3.0.4)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -128,6 +130,7 @@ DEPENDENCIES
   mocha (~> 0.10.0)
   multi_json
   pusher (~> 0.15.1)
+  redis-namespace
   rollout!
   rspec (~> 2.14.0)
   sentry-raven
