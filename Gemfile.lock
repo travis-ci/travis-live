@@ -52,6 +52,7 @@ GEM
     hitimes (1.2.3)
     httpclient (2.7.0.1)
     i18n (0.7.0)
+    jemalloc (1.0.1)
     json (1.8.3)
     listen (3.0.5)
       rb-fsevent (>= 0.9.3)
@@ -125,6 +126,7 @@ DEPENDENCIES
   foreman
   guard
   guard-rspec
+  jemalloc
   metriks
   metriks-librato_metrics
   mocha (~> 0.10.0)
