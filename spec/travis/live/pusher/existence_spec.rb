@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'travis/live/pusher/existence'
 
 describe Travis::Live::Pusher::Existence do

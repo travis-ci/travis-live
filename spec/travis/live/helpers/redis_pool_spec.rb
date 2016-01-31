@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'travis/live/helpers/redis_pool'
 
 describe Travis::Live::Helpers::RedisPool do
