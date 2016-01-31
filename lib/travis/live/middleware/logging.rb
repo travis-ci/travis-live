@@ -33,9 +33,10 @@ module Travis
 
         def log(data)
           line = "event=#{data['event']}"
+          line << " slug=#{data['repository_slug']}" if data['repository_slug']
           line << " build=#{data['build']}" if data['build']
           line << " job=#{data['job']}" if data['job']
-          line << " uuid=#{data['uuid']}"
+          line << " uuid=#{data['uuid'] || 'empty'}"
           line << " jid=#{data['jid']}"
           line << " time=#{data['time']}" if data['time']
           Travis::Live.logger.info(line)
