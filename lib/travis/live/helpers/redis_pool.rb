@@ -9,6 +9,7 @@ module Travis
         attr_reader :pool
 
         def initialize(options = {})
+          puts options.inspect
           pool_options = options.delete(:pool) || {}
           pool_options[:size] ||= 10
           pool_options[:timeout] ||= 10
