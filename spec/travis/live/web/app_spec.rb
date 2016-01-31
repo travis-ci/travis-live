@@ -8,7 +8,7 @@ describe Travis::Live::Web::App do
   include Rack::Test::Methods
 
   let(:app)       { described_class.new(nil, pusher) }
-  let(:pusher)    { double(:pusher) }
+  let(:pusher)    { mock() }
   let(:existence) { Travis::Live::Pusher::Existence.new }
 
   before do
@@ -32,10 +32,9 @@ describe Travis::Live::Web::App do
         { 'name' => 'channel_occupied', 'channel' => 'foo' },
         { 'name' => 'channel_vacated',  'channel' => 'bar' }
       ])
-      pusher.should_receive(:webhook) do |request|
+      pusher.expects(:webhook).with() { |request|
         request.path_info == '/pusher/existence'
-        webhook
-      end
+      }.returns(webhook)
 
       response = post '/pusher/existence'
       response.status.should == 204
@@ -47,10 +46,9 @@ describe Travis::Live::Web::App do
         { 'name' => 'channel_vacated', 'channel' => 'foo' },
         { 'name' => 'channel_occupied', 'channel' => 'bar' }
       ])
-      pusher.should_receive(:webhook) do |request|
+      pusher.expects(:webhook).with() { |request|
         request.path_info == '/pusher/existence'
-        webhook
-      end
+      }.returns(webhook)
 
       response = post '/pusher/existence'
       response.status.should == 204
@@ -61,10 +59,9 @@ describe Travis::Live::Web::App do
 
     it 'responds with 401 with invalid webhook' do
       webhook = OpenStruct.new(valid?: false)
-      pusher.should_receive(:webhook) do |request|
+      pusher.expects(:webhook).with() { |request|
         request.path_info == '/pusher/existence'
-        webhook
-      end
+      }.returns(webhook)
 
       response = post '/pusher/existence'
       response.status.should == 401
