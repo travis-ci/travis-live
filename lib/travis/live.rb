@@ -1,4 +1,5 @@
 require 'travis/live/config'
+require 'active_support/core_ext/logger'
 require 'pusher'
 
 module Travis

@@ -1,3 +1,5 @@
+require 'travis/live'
+
 module Travis
   module Live
     module Services
@@ -41,10 +43,10 @@ module Travis
             end
 
             measure('pusher') do
-              Travis.pusher[channel].trigger(client_event, payload)
+              Travis::Live.pusher[channel].trigger(client_event, payload)
             end
           rescue ::Pusher::Error => e
-            Travis.logger.error("error=Pusher::Error message=\"#{e.message}\" event=#{client_event} payload=\"#{part.inspect}\"")
+            Travis::Live.logger.error("error=Pusher::Error message=\"#{e.message}\" event=#{client_event} payload=\"#{part.inspect}\"")
             raise
           end
 
