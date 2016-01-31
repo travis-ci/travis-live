@@ -2,6 +2,9 @@ language: ruby
 
 cache: bundler
 
-rvm: 2.1.6
+rvm: 2.1.8
+
+services:
+  - redis
 
 script: bundle exec rspec spec
