@@ -45,4 +45,14 @@ module Travis
       end
     end
   end
+
+  class << self
+    def config
+      Live.config
+    end
+
+    def logger
+      Live.logger
+    end
+  end
 end
