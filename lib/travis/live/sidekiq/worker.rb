@@ -6,6 +6,7 @@ module Travis
     module Sidekiq
       class Worker
         include ::Sidekiq::Worker
+        sidekiq_options :retry => 3, :dead => false
 
         def perform(uuid, target, method, payload, params)
           Travis::Live::Services::SendUpdate.new(payload, params).run
