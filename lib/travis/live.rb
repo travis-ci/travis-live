@@ -1,4 +1,5 @@
 require 'travis/live/config'
+require 'travis/live/helpers'
 require 'logger'
 require 'pusher'
 
