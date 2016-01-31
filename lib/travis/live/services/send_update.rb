@@ -7,6 +7,8 @@ module Travis
       class SendUpdate
         include Helpers::Metrics
 
+        METRIKS_PREFIX = 'live.send_update'
+
         attr_reader :payload, :params
 
         def initialize(payload, params = {})
