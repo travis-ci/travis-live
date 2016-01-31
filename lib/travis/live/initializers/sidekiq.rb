@@ -41,7 +41,7 @@ Sidekiq.configure_server do |config|
   end
 end
 
-if Travis.config.sentry
+if Travis::Live.config.sentry
   Travis::Exceptions::Reporter.start
 end
 
