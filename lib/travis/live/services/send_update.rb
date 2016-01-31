@@ -32,7 +32,7 @@ module Travis
         private
 
           def trigger(channel, payload)
-            if existence_check_metrics? || existence_check?
+            if existence_check?
               if channel_occupied?(channel_name)
                 mark('pusher.send')
               else
@@ -73,6 +73,10 @@ module Travis
 
           def force_private_channels?
             Travis::Live.config.pusher.secure?
+          end
+
+          def existence_check?
+            Travis::Live.config.pusher.channels_existence_check?
           end
 
           def repository_private?
