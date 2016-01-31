@@ -7,8 +7,8 @@ module Travis
       class Existence
         attr_reader :redis
 
-        def initialize(redis = Helpers::RedisPool.new)
-          @redis = redis
+        def initialize(redis = nil)
+          @redis = redis || Helpers::RedisPool.new(Travis::Live.config.redis)
         end
 
         def occupied!(channel_name)
