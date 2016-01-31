@@ -1,5 +1,5 @@
 require 'travis/live/config'
-require 'travis/live/helpers'
+require 'travis/live/helpers/redis_pool'
 require 'logger'
 require 'pusher'
 
