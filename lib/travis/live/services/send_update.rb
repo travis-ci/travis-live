@@ -82,6 +82,10 @@ module Travis
             Travis::Live.config.pusher.secure?
           end
 
+          def channel_occupied?(channel_name)
+            Travis::Live::Pusher::Existence.new.occupied?(channel_name)
+          end
+
           def existence_check?
             Travis::Live.config.pusher.channels_existence_check?
           end
