@@ -38,7 +38,7 @@ module Travis
           line << " uuid=#{data['uuid']}"
           line << " jid=#{data['jid']}"
           line << " time=#{data['time']}" if data['time']
-          Travis.logger.info(line)
+          Travis::Live.logger.info(line)
         end
       end
     end
