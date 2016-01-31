@@ -1,40 +1,13 @@
-$:.unshift(File.expand_path('../..', File.dirname(__FILE__)))
-
-require 'bundler/setup'
 require 'metriks/librato_metrics_reporter'
 require 'travis/live/error_handler'
 require 'travis/live/config'
-require 'travis/live/pusher/worker'
+require 'travis/live/sidekiq/worker'
 require 'travis/live/middleware/metriks'
 require 'travis/live/middleware/logging'
 require 'travis/support/exceptions'
 require 'travis/support/logging'
 require 'travis/support/logger'
 require 'travis/support/metrics'
-
-module Travis
-  class << self
-    def env
-     ENV['ENV'] || ENV['RAILS_ENV'] || ENV['RACK_ENV'] || 'development'
-    end
-
-    def logger
-      @logger ||= Logger.configure(Logger.new(STDOUT))
-    end
-
-    def logger=(logger)
-      @logger = Logger.configure(logger)
-    end
-
-    def uuid=(uuid)
-      Thread.current[:uuid] = uuid
-    end
-
-    def uuid
-      Thread.current[:uuid] ||= SecureRandom.uuid
-    end
-  end
-end
 
 $stdout.sync = true
 
@@ -50,8 +23,8 @@ end
 
 Sidekiq.configure_server do |config|
   config.redis = {
-    :url       => Travis.config.redis.url,
-    :namespace => Travis.config.sidekiq.namespace
+    :url       => Travis::Live.config.redis.url,
+    :namespace => Travis::Live.config.sidekiq.namespace
   }
   config.server_middleware do |chain|
     chain.add Travis::Live::Middleware::Metriks
@@ -70,4 +43,4 @@ if Travis.config.sentry
   Travis::Exceptions::Reporter.start
 end
 
-Travis::Metrics.setup(Travis.config.metrics.reporter)
+Travis::Metrics.setup(Travis::Live.config.metrics.reporter)

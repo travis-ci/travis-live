@@ -4,7 +4,6 @@ end
 
 require 'travis/support'
 require 'travis/support/testing/webmock'
-require 'travis/live/pusher'
 
 require 'mocha'
 
@@ -18,9 +17,4 @@ RSpec.configure do |c|
   # c.backtrace_exclusion_patterns = []
 
   c.include Travis::Support::Testing::Webmock
-
-  c.before :each do
-    Travis.config.oauth2 ||= {}
-    Travis.config.oauth2.scope = 'public_repo,user'
-  end
 end
