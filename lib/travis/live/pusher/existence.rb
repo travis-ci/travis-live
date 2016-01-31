@@ -1,4 +1,5 @@
 require 'redis'
+require 'travis/live'
 require 'travis/live/helpers/redis_pool'
 
 module Travis
