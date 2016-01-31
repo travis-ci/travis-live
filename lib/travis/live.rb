@@ -20,6 +20,10 @@ module Travis
         end
       end
 
+      def redis_pool
+        @redis_pool ||= Helpers::RedisPool.new(config.redis.to_hash)
+      end
+
       def env
        ENV['ENV'] || ENV['RAILS_ENV'] || ENV['RACK_ENV'] || 'development'
       end

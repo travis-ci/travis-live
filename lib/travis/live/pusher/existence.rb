@@ -9,7 +9,7 @@ module Travis
         attr_reader :redis
 
         def initialize(redis = nil)
-          @redis = redis || Helpers::RedisPool.new(Travis::Live.config.redis.to_hash)
+          @redis = redis || Travis::Live.redis_pool
         end
 
         def occupied!(channel_name)

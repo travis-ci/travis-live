@@ -46,3 +46,6 @@ if Travis::Live.config.sentry
 end
 
 Travis::Metrics.setup(Travis::Live.config.metrics.reporter)
+
+# pre-connect the redis pool
+Travis::Live.redis_pool
