@@ -15,4 +15,4 @@ module Travis
   end
 end
 
-const_set("Travis::Async::Sidekiq::Worker", Travis::Live::Sidekiq::Worker)
+Travis.const_set("Async::Sidekiq::Worker", Travis::Live::Sidekiq::Worker)
