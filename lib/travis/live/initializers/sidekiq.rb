@@ -16,7 +16,7 @@ $stdout.sync = true
 if Travis.config.sentry.dsn
   require 'raven'
   Raven.configure do |config|
-    config.dsn = Travis.config.sentry.dsn
+    config.dsn = Travis::Live.config.sentry.dsn
 
     config.current_environment = Travis.env
     config.environments = ["staging", "production"]
