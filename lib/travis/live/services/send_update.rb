@@ -1,5 +1,6 @@
 require 'travis/live'
 require 'travis/live/helpers/metrics'
+require 'travis/live/pusher/existence'
 
 module Travis
   module Live
