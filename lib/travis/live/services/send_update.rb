@@ -1,9 +1,12 @@
 require 'travis/live'
+require 'travis/live/helpers/metrics'
 
 module Travis
   module Live
     module Services
       class SendUpdate
+        include Helpers::Metrics
+
         attr_reader :payload, :params
 
         def initialize(payload, params = {})
