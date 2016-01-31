@@ -12,14 +12,15 @@ module Travis
           uuid, _, _, payload, params = *message['args']
           data = Hash.new.tap do |data|
             data['type'] = queue
+
             if payload['build']
               data['build'] = payload['build']['id']
             elsif message['build_id']
               data['build'] = payload['build_id']
             end
 
-            if payload['repository']
-              data['repo'] = payload['repository']['slug']
+            if payload['repository_slug']
+              data['slug'] = payload['repository_slug']
             end
 
             data['event'] = params['event'] if params['event']
@@ -33,7 +34,7 @@ module Travis
 
         def log(data)
           line = "event=#{data['event']}"
-          line << " slug=#{data['repository_slug']}" if data['repository_slug']
+          line << " slug=#{data['slug']}" if data['slug']
           line << " build=#{data['build']}" if data['build']
           line << " job=#{data['job']}" if data['job']
           line << " uuid=#{data['uuid'] || 'empty'}"
