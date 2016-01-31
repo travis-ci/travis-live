@@ -2,7 +2,7 @@ $LOAD_PATH << 'lib'
 
 require 'metriks/librato_metrics_reporter'
 require 'travis/live/error_handler'
-require 'travis/live/config'
+require 'travis/live'
 require 'travis/live/sidekiq/worker'
 require 'travis/live/middleware/metriks'
 require 'travis/live/middleware/logging'
