@@ -38,7 +38,7 @@ module Travis
 
         private
 
-          def trigger(channel, payload)
+          def trigger(channel_name, payload)
             if existence_check?
               if channel_occupied?(channel_name)
                 mark('pusher.send')
@@ -50,7 +50,7 @@ module Travis
             end
 
             measure('pusher') do
-              Travis::Live.pusher[channel].trigger(client_event, payload)
+              Travis::Live.pusher[channel_name].trigger(client_event, payload)
             end
           rescue ::Pusher::Error => e
             Travis::Live.logger.error("error=Pusher::Error message=\"#{e.message}\" event=#{client_event} payload=\"#{part.inspect}\"")
