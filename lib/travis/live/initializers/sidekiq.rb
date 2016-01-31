@@ -13,7 +13,7 @@ require 'travis/support/metrics'
 
 $stdout.sync = true
 
-if Travis.config.sentry.dsn
+if Travis::Live.config.sentry.dsn
   require 'raven'
   Raven.configure do |config|
     config.dsn = Travis::Live.config.sentry.dsn
