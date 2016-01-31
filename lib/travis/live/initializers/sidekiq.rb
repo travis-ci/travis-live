@@ -18,7 +18,7 @@ if Travis::Live.config.sentry.dsn
   Raven.configure do |config|
     config.dsn = Travis::Live.config.sentry.dsn
 
-    config.current_environment = Travis.env
+    config.current_environment = Travis::Live.env
     config.environments = ["staging", "production"]
   end
 end
