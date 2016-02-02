@@ -45,8 +45,7 @@ module Travis
                 mark('pusher.send')
               else
                 mark('pusher.ignore')
-
-                return if existence_check?
+                return
               end
             end
 
