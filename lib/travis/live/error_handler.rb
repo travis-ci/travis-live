@@ -6,9 +6,9 @@ module Travis
       def call(worker, job, queue)
         yield
       rescue => ex
-        Sidekiq.logger.warn(ex)
+        Travis::Live.logger.warn(ex)
 
-        if Travis.config.sentry.any?
+        if Travis::Live.config.sentry.any?
           Raven.capture_exception(ex, extra: {sidekiq: job})
         end
 

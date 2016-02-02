@@ -1,11 +1,15 @@
+require 'travis/live'
+require 'travis/live/helpers/metrics'
+require 'travis/live/pusher/existence'
+
 module Travis
   module Live
-    module Pusher
-      class Task
-        class << self
-          def perform(*args)
-            new(*args).run
-          end
+    module Services
+      class SendUpdate
+        include Helpers::Metrics
+
+        def self.metriks_prefix
+          'live.send_update'
         end
 
         attr_reader :payload, :params
@@ -16,8 +20,8 @@ module Travis
         end
 
         def run
-          timeout after: params[:timeout] || 60 do
-            process
+          timeout after: params[:timeout] || 5 do
+            trigger(channel, payload)
           end
         end
 
@@ -29,22 +33,27 @@ module Travis
           @client_event ||= (event =~ /job:.*/ ? event.gsub(/(test|configure):/, '') : event)
         end
 
-        def channels
-          channels = ["repo-#{repo_id}"]
-          channels << "common" if public_channels? && !Travis.config.pusher.disable_common_channel?
-          channels.map { |channel| [channel_prefix, channel].compact.join('-') }
+        def channel
+          [channel_prefix, "repo-#{repo_id}"].compact.join('-')
         end
 
         private
 
-          def process
-            channels.each { |channel| trigger(channel, payload) }
-          end
+          def trigger(channel_name, payload)
+            if existence_check?
+              if channel_occupied?(channel_name)
+                mark('pusher.send')
+              else
+                mark('pusher.ignore')
+                return
+              end
+            end
 
-          def trigger(channel, payload)
-            Travis.pusher[channel].trigger(client_event, payload)
+            measure('pusher') do
+              Travis::Live.pusher[channel_name].trigger(client_event, payload)
+            end
           rescue ::Pusher::Error => e
-            Travis.logger.error("[addons:pusher] Could not send event due to Pusher::Error: #{e.message}, event=#{client_event}, payload: #{part.inspect}")
+            Travis::Live.logger.error("error=Pusher::Error message=\"#{e.message}\" event=#{client_event} payload=\"#{part.inspect}\"")
             raise
           end
 
@@ -70,7 +79,15 @@ module Travis
           end
 
           def force_private_channels?
-            Travis.config.pusher.secure?
+            Travis::Live.config.pusher.secure?
+          end
+
+          def channel_occupied?(channel_name)
+            Travis::Live::Pusher::Existence.new.occupied?(channel_name)
+          end
+
+          def existence_check?
+            Travis::Live.config.pusher.channels_existence_check?
           end
 
           def repository_private?
