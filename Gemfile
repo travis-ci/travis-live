@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'activesupport',    '~> 4.2.5'
 gem 'travis-support',   github: 'travis-ci/travis-support'
-gem 'travis-config',    '~> 1.0.3'
+gem 'travis-config',    '~> 1.0', '>= 1.0.6'
 
 gem 'sidekiq',          '~> 4.0.0'
 gem 'redis-namespace'
