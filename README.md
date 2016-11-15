@@ -1,29 +1,7 @@
 # Travis::Live
 
-TODO: Write a gem description
+Travis::Live is our central place for sending status update messages to pusher.
 
-## Installation
+travis-scheduler, travis-hub, travis-gatekeeper, and travis-github-sync talk to it via the `Travis::Async::Sidekiq::Worker` class over sidekiq.
 
-Add this line to your application's Gemfile:
-
-    gem 'travis-live'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install travis-live
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it ( https://github.com/[my-github-username]/travis-live/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+Live talks to pusher.
