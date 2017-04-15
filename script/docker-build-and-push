@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -ev
+
+docker login -u=$QUAY_ROBOT_HANDLE -p=$QUAY_ROBOT_TOKEN quay.io;
+
+docker-compose build notify;
+
+docker images;
+
+docker tag travislive_notify quay.io/travisci/travis-live:$TRAVIS_BRANCH;
+docker push quay.io/travisci/travis-live:$TRAVIS_BRANCH;
+
+docker tag travislive_notify quay.io/travisci/travis-live:$TRAVIS_COMMIT;
+docker push quay.io/travisci/travis-live:$TRAVIS_COMMIT;
+
+if [ ${TRAVIS_BRANCH} = "master" ]; then
+  docker tag travislive_notify quay.io/travisci/travis-live:latest";
+  docker push travislive_notify quay.io/travisci/travis-live:$TRAVIS_BRANCH";
+fi
+
+exit 0;

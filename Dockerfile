@@ -1,11 +1,18 @@
-FROM convox/ruby
+FROM ruby:2.3.4
 
-# copy only the files needed for bundle install
-# uncomment the vendor/cache line if you `bundle package` your gems
-COPY Gemfile      /app/Gemfile
-COPY Gemfile.lock /app/Gemfile.lock
-# COPY vendor/cache /app/vendor/cache
-RUN bundle install
+LABEL maintainer Travis CI GmbH <support+travis-app-docker-images@travis-ci.com>
 
-# copy the rest of the app
-COPY . /app
+# throw errors if Gemfile has been modified since Gemfile.lock
+RUN bundle config --global frozen 1
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+COPY Gemfile      /usr/src/app
+COPY Gemfile.lock /usr/src/app
+
+RUN bundle install --without test
+
+COPY . /usr/src/app
+
+CMD bundle exec je sidekiq -c 25 -r ./lib/travis/live/pusher.rb -q pusher-live live

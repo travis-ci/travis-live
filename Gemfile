@@ -7,7 +7,7 @@ gem 'travis-config',    '~> 1.0.3'
 gem 'sidekiq',          '~> 4.0.0'
 gem 'redis-namespace'
 
-gem 'jemalloc'
+gem 'jemalloc',         github: 'joshk/jemalloc-rb'
 
 gem 'sentry-raven'
 gem 'rollout',          github: 'jamesgolick/rollout', :ref => 'v1.1.0'
