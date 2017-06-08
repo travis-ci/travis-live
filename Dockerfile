@@ -13,6 +13,8 @@ WORKDIR /usr/src/app
 COPY Gemfile      /usr/src/app
 COPY Gemfile.lock /usr/src/app
 
+RUN bundle install --deployment
+
 COPY . /usr/src/app
 
 CMD /bin/bash
