@@ -25,12 +25,22 @@ module Travis
           params[:event]
         end
 
+        def user_ids
+          params[:user_ids]
+        end
+
         def client_event
           @client_event ||= (event =~ /job:.*/ ? event.gsub(/(test|configure):/, '') : event)
         end
 
         def channels
-          channels = ["repo-#{repo_id}"]
+          channels = []
+          if user_ids
+            user_channels = user_ids.map { |id| "user-#{id}" }
+            channels.push *user_channels
+          else
+            channels << "repo-#{repo_id}"
+          end
           channels << "common" if public_channels? && !Travis.config.pusher.disable_common_channel?
           channels.map { |channel| [channel_prefix, channel].compact.join('-') }
         end
