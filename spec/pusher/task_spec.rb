@@ -34,6 +34,17 @@ describe Travis::Live::Pusher::Task do
       task.channels.should == ["repo-16594", "common"]
     end
 
+    context 'when user_ids were sent' do
+      before do
+        params.merge! user_ids: [1, 3]
+      end
+
+      it 'sends to user channels instead of repo channels' do
+        task = Travis::Live::Pusher::Task.new(payload, params)
+        task.channels.should == ["user-1", "user-3", "common"]
+      end
+    end
+
     it 'disables common channel with disable_common_channel setting' do
       begin
         Travis.config.pusher.disable_common_channel = true
