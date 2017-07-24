@@ -57,8 +57,7 @@ describe Travis::Live::Pusher::Task do
 
     it 'triggers a pusher event with the correct payload' do
       task = Travis::Live::Pusher::Task.new(payload, params)
-      task.expects(:trigger).with("repo-16594", payload.deep_symbolize_keys)
-      task.expects(:trigger).with("common", payload.deep_symbolize_keys)
+      task.expects(:trigger).with(["repo-16594", "common"], payload.deep_symbolize_keys)
       task.run
     end
   end

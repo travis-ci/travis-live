@@ -48,11 +48,11 @@ module Travis
         private
 
           def process
-            channels.each { |channel| trigger(channel, payload) }
+            trigger(channels, payload)
           end
 
-          def trigger(channel, payload)
-            Travis.pusher[channel].trigger(client_event, payload)
+          def trigger(channels, payload)
+            Travis.pusher.trigger(channels, client_event, payload)
           rescue ::Pusher::Error => e
             Travis.logger.error("[addons:pusher] Could not send event due to Pusher::Error: #{e.message}, event=#{client_event}, payload: #{part.inspect}")
             raise
