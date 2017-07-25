@@ -38,7 +38,8 @@ module Travis
           if user_ids
             user_channels = user_ids.map { |id| "user-#{id}" }
             channels.push *user_channels
-          else
+          end
+          if repository_public? || !user_ids
             channels << "repo-#{repo_id}"
           end
           channels << "common" if public_channels? && !Travis.config.pusher.disable_common_channel?
@@ -85,6 +86,10 @@ module Travis
 
           def repository_private?
             payload.key?(:repository) ? payload[:repository][:private] : payload[:repository_private]
+          end
+
+          def repository_public?
+            !repository_private?
           end
 
           def timeout(options = { after: 60 }, &block)

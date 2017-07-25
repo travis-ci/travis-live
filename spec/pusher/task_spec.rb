@@ -39,9 +39,15 @@ describe Travis::Live::Pusher::Task do
         params.merge! user_ids: [1, 3]
       end
 
-      it 'sends to user channels instead of repo channels' do
+      it 'sends to user channels as well' do
         task = Travis::Live::Pusher::Task.new(payload, params)
-        task.channels.should == ["user-1", "user-3", "common"]
+        task.channels.should == ["user-1", "user-3", "repo-16594", "common"]
+      end
+
+      it 'does not send to a repo channel when repository is private' do
+        payload['repository_private'] = true
+        task = Travis::Live::Pusher::Task.new(payload, params)
+        task.channels.should == ["private-user-1", "private-user-3"]
       end
     end
 
