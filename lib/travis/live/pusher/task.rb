@@ -42,7 +42,6 @@ module Travis
           if repository_public? || !user_ids
             channels << "repo-#{repo_id}"
           end
-          channels << "common" if public_channels? && !Travis.config.pusher.disable_common_channel?
           channels.map { |channel| [channel_prefix, channel].compact.join('-') }
         end
 
