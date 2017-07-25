@@ -31,7 +31,7 @@ describe Travis::Live::Pusher::Task do
   describe 'trigger' do
     it 'assigns the correct channels' do
       task = Travis::Live::Pusher::Task.new(payload, params)
-      task.channels.should == ["repo-16594", "common"]
+      task.channels.should == ["repo-16594"]
     end
 
     context 'when user_ids were sent' do
@@ -41,7 +41,7 @@ describe Travis::Live::Pusher::Task do
 
       it 'sends to user channels as well' do
         task = Travis::Live::Pusher::Task.new(payload, params)
-        task.channels.should == ["user-1", "user-3", "repo-16594", "common"]
+        task.channels.should == ["user-1", "user-3", "repo-16594"]
       end
 
       it 'does not send to a repo channel when repository is private' do
@@ -51,19 +51,9 @@ describe Travis::Live::Pusher::Task do
       end
     end
 
-    it 'disables common channel with disable_common_channel setting' do
-      begin
-        Travis.config.pusher.disable_common_channel = true
-        task = Travis::Live::Pusher::Task.new(payload, params)
-        task.channels.should == ["repo-16594"]
-      ensure
-        Travis.config.pusher.disable_common_channel = false
-      end
-    end
-
     it 'triggers a pusher event with the correct payload' do
       task = Travis::Live::Pusher::Task.new(payload, params)
-      task.expects(:trigger).with(["repo-16594", "common"], payload.deep_symbolize_keys)
+      task.expects(:trigger).with(["repo-16594"], payload.deep_symbolize_keys)
       task.run
     end
   end
