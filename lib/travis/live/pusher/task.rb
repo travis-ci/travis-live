@@ -26,7 +26,7 @@ module Travis
         end
 
         def user_ids
-          params[:user_ids]
+          params[:user_ids] || []
         end
 
         def client_event
@@ -35,11 +35,10 @@ module Travis
 
         def channels
           channels = []
-          if user_ids
-            user_channels = user_ids.map { |id| "user-#{id}" }
-            channels.push *user_channels
-          end
-          if repository_public? || !user_ids
+          user_channels = user_ids.map { |id| "user-#{id}" }
+          channels.push *user_channels
+
+          if repository_public?
             channels << "repo-#{repo_id}"
           end
           channels.map { |channel| [channel_prefix, channel].compact.join('-') }
