@@ -44,7 +44,7 @@ describe Travis::Live::Pusher::Task do
           Travis.config.pusher.secure = true
         end
 
-        it 'doesn\'t send to public channels' do
+        it 'does not send to public (repo) channels' do
           task = Travis::Live::Pusher::Task.new(payload, params)
           task.channels.should == ["private-user-1", "private-user-3"]
         end
