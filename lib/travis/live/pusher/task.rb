@@ -34,14 +34,13 @@ module Travis
         end
 
         def channels
-          channels = []
-          user_channels = user_ids.map { |id| "user-#{id}" }
-          channels.push *user_channels
+          channels = user_ids.map { |id| "private-user-#{id}" }
 
-          if repository_public?
+          if public_channels?
             channels << "repo-#{repo_id}"
           end
-          channels.map { |channel| [channel_prefix, channel].compact.join('-') }
+
+          channels
         end
 
         private
@@ -84,10 +83,6 @@ module Travis
 
           def repository_private?
             payload.key?(:repository) ? payload[:repository][:private] : payload[:repository_private]
-          end
-
-          def repository_public?
-            !repository_private?
           end
 
           def timeout(options = { after: 60 }, &block)
