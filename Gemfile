@@ -2,11 +2,12 @@ source 'https://rubygems.org'
 
 ruby '2.4.1'
 
+gem 'sidekiq-pro', source: 'https://gems.contribsys.com'
+
 gem 'activesupport',    '~> 4.2.5'
 gem 'travis-support',   github: 'travis-ci/travis-support'
 gem 'travis-config',    '~> 1.0.3'
 
-gem 'sidekiq',          '~> 4.0.0'
 gem 'redis-namespace'
 
 gem 'jemalloc'
