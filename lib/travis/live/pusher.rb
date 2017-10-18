@@ -11,6 +11,7 @@ require 'travis/support/exceptions'
 require 'travis/support/logging'
 require 'travis/support/logger'
 require 'travis/support/metrics'
+require 'sidekiq-pro'
 
 module Travis
   class << self
@@ -49,6 +50,13 @@ if Travis.config.sentry.dsn
 end
 
 Sidekiq.configure_server do |config|
+  pro = ::Sidekiq::NAME == 'Sidekiq Pro'
+
+  if pro
+    config.super_fetch!
+    config.reliable_scheduler!
+  end
+
   config.redis = {
     :url       => Travis.config.redis.url,
     :namespace => Travis.config.sidekiq.namespace
@@ -61,7 +69,6 @@ Sidekiq.configure_server do |config|
       chain.remove(::Raven::Sidekiq)
     end
 
-    chain.remove(Sidekiq::Middleware::Server::Logging)
     chain.add(Travis::Live::ErrorHandler)
   end
 end
