@@ -4,9 +4,10 @@ ruby '2.4.2'
 
 gem 'sidekiq-pro', source: 'https://gems.contribsys.com'
 
-gem 'activesupport',    '~> 4.2.5'
-gem 'travis-support',   github: 'travis-ci/travis-support'
-gem 'travis-config',    '~> 1.0.3'
+gem 'activesupport',     '~> 4.2.5'
+gem 'travis-config',     '~> 1.0.3'
+gem 'travis-exceptions', github: 'travis-ci/travis-exceptions'
+gem 'travis-support',    github: 'travis-ci/travis-support'
 
 gem 'redis-namespace'
 

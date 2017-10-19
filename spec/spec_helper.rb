@@ -2,7 +2,6 @@ RSpec.configure do |c|
   c.before(:each) { Time.now.utc.tap { | now| Time.stubs(:now).returns(now) } }
 end
 
-require 'travis/support'
 require 'travis/support/testing/webmock'
 require 'travis/live/pusher'
 
