@@ -25,6 +25,10 @@ module Travis
           params[:event]
         end
 
+        def type
+          event.split(':')[0]
+        end
+
         def user_ids
           params[:user_ids] || []
         end
@@ -46,7 +50,23 @@ module Travis
         private
 
           def process
-            channels.each_slice(10) { |channels_part| trigger(channels_part, payload) }
+            payload_to_process = prepare_payload(payload)
+            channels.each_slice(10) { |channels_part| trigger(channels_part, payload_to_process) }
+          end
+
+          def prepare_payload(payload)
+            encoded_payload = MultiJson.encode(payload)
+            if encoded_payload.length > 10_000
+              if type == 'job'
+                { id: payload[:id], build_id: payload[:build_id], _no_full_payload: true }
+              elsif type == 'build'
+                { build: { id: payload[:build][:id]  }, _no_full_payload: true }
+              else
+                payload
+              end
+            else
+              payload
+            end
           end
 
           def trigger(channels, payload)
