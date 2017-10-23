@@ -34,6 +34,31 @@ describe Travis::Live::Pusher::Task do
       task.channels.should == ["repo-16594"]
     end
 
+    it 'sends only an id if the job  payload is too big' do
+      payload['commit']['message'] = 'a' * 10240
+      task = Travis::Live::Pusher::Task.new(payload, params)
+      task.expects(:trigger).with(["repo-16594"], { id: 430969, build_id: 430967, _no_full_payload: true })
+      task.run
+    end
+
+    it 'sends only an id if the job  payload is too big' do
+      payload = {
+        "build" => {
+          "id" => 100
+        },
+        "commit" => {
+          "message" => "a" * 10240
+        },
+        "repository" => {
+          "id" => 1
+        }
+      }
+      params = { "event" => "build:started" }
+      task = Travis::Live::Pusher::Task.new(payload, params)
+      task.expects(:trigger).with(["repo-1"], { build: { id: 100 }, _no_full_payload: true })
+      task.run
+    end
+
     context 'when user_ids were sent' do
       before do
         params.merge! user_ids: [1, 3]
