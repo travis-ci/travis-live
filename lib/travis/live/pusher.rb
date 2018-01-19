@@ -3,13 +3,12 @@ $:.unshift(File.expand_path('../..', File.dirname(__FILE__)))
 require 'metriks/librato_metrics_reporter'
 require 'travis/live/config'
 require 'travis/live/pusher/worker'
-require 'travis/live/middleware/metriks'
 require 'travis/live/middleware/logging'
+require 'travis/metrics/sidekiq'
 require 'travis/exceptions'
 require 'travis/exceptions/sidekiq'
 require 'travis/support/logging'
 require 'travis/support/logger'
-require 'travis/support/metrics'
 require 'sidekiq-pro'
 
 module Travis
@@ -51,7 +50,7 @@ Sidekiq.configure_server do |config|
     :namespace => Travis.config.sidekiq.namespace
   }
   config.server_middleware do |chain|
-    chain.add Travis::Live::Middleware::Metriks
+    chain.add Travis::Metrics::Sidekiq
     chain.add Travis::Live::Middleware::Logging
 
     if Travis.config.sentry
@@ -64,4 +63,4 @@ if Travis.config.sentry
   Travis::Exceptions.setup(Travis.config, Travis.config.env, Travis.logger)
 end
 
-Travis::Metrics.setup(Travis.config.metrics.reporter)
+Travis::Metrics.setup(Travis.config.metrics, Travis.logger)

@@ -8,6 +8,10 @@ gem 'activesupport',     '~> 4.2.5'
 gem 'travis-config',     '~> 1.0.3'
 gem 'travis-exceptions', github: 'travis-ci/travis-exceptions'
 gem 'travis-support',    github: 'travis-ci/travis-support'
+gem 'travis-metrics',    github: 'travis-ci/travis-metrics'
+
+gem 'metriks',                 git: 'https://github.com/travis-ci/metriks', ref: 'igor-hdr-histogram'
+gem 'metriks-librato_metrics', git: 'https://github.com/travis-ci/metriks-librato_metrics', ref: 'igor-hdr-histogram'
 
 gem 'redis-namespace'
 
@@ -15,8 +19,6 @@ gem 'jemalloc'
 
 gem 'sentry-raven'
 gem 'rollout',          github: 'jamesgolick/rollout', :ref => 'v1.1.0'
-gem 'metriks'
-gem 'metriks-librato_metrics'
 gem 'multi_json'
 gem 'pusher',           '~> 0.15.1'
 

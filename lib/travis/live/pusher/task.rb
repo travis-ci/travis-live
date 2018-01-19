@@ -1,3 +1,5 @@
+require 'metriks'
+
 module Travis
   module Live
     module Pusher
@@ -16,6 +18,7 @@ module Travis
         end
 
         def run
+          ::Metriks.meter("travis-live.events.#{event}").mark
           timeout after: params[:timeout] || 60 do
             process
           end
