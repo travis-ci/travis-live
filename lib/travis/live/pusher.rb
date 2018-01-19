@@ -49,7 +49,7 @@ Sidekiq.configure_server do |config|
     :namespace => Travis.config.sidekiq.namespace
   }
   config.server_middleware do |chain|
-    chain.add Metrics::Sidekiq
+    chain.add Travis::Metrics::Sidekiq
     chain.add Travis::Live::Middleware::Logging
 
     if Travis.config.sentry
