@@ -10,8 +10,8 @@ gem 'travis-exceptions', github: 'travis-ci/travis-exceptions'
 gem 'travis-support',    github: 'travis-ci/travis-support'
 gem 'travis-metrics',    github: 'travis-ci/travis-metrics'
 
-gem 'metriks',                 git: 'https://github.com/travis-ci/metriks', ref: 'igor-hdr-histogram'
-gem 'metriks-librato_metrics', git: 'https://github.com/travis-ci/metriks-librato_metrics', ref: 'igor-hdr-histogram'
+gem 'metriks',                 git: 'https://github.com/travis-ci/metriks'
+gem 'metriks-librato_metrics', git: 'https://github.com/travis-ci/metriks-librato_metrics'
 
 gem 'redis-namespace'
 
