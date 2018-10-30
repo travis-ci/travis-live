@@ -1,5 +1,8 @@
 language: ruby
 
+sudo: required
+dist: trusty
+
 cache: bundler
 
 rvm: 2.4.2
@@ -7,4 +10,4 @@ rvm: 2.4.2
 before_install:
   - bundle config https://gems.contribsys.com/ $BUNDLE_GEMS__CONTRIBSYS__COM
 
-script: bundle exec rspec spec
+script: bundle exec rspec spec && ./script/docker-build-and-push
