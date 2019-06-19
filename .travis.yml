@@ -1,10 +1,25 @@
 language: ruby
-
-cache: bundler
-
+sudo: false
+dist: trusty
 rvm: 2.4.2
-
+cache: bundler
 before_install:
-  - bundle config https://gems.contribsys.com/ $BUNDLE_GEMS__CONTRIBSYS__COM
+  - gem uninstall bundler -x
+  - gem install bundler --version=1.16.1
+  - bundler --version
 
-script: bundle exec rspec spec
+script:
+  - bundle exec rspec
+
+jobs:
+  include:
+    - stage: "testing time"
+    - stage: ":ship: it to Quay.io"
+      language: ruby
+      before_install: skip
+      install: skip
+      before_script:
+        - curl -L https://github.com/docker/compose/releases/download/1.13.0/docker-compose-`uname -s`-`uname -m` > ./docker-compose
+        - sudo mv ./docker-compose /usr/local/bin/docker-compose
+        - sudo chmod +x /usr/local/bin/docker-compose
+      script: ./script/docker-build-and-push
