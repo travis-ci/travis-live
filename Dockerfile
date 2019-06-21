@@ -11,7 +11,11 @@ RUN ( \
 )
 
 # throw errors if Gemfile has been modified since Gemfile.lock
-RUN bundle config --global frozen 1; groupadd -r travis && useradd -m -r -g travis travis && mkdir -p /usr/src/app && chown -R travis:travis /usr/src/app;
+RUN bundle config --global frozen 1; \
+ groupadd -r travis; \
+ useradd -m -r -g travis travis; \
+ mkdir -p /usr/src/app; \
+ chown -R travis:travis /usr/src/app;
 USER travis
 WORKDIR /usr/src/app
 
