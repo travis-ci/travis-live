@@ -7,15 +7,14 @@ RUN ( \
    printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list; \
    apt-get update ; \
    apt-get install -y --no-install-recommends  gettext-base; \
-   rm -rf /var/lib/apt/lists/* \
+   rm -rf /var/lib/apt/lists/* ; \
+   groupadd -r travis && useradd -m -r -g travis travis; \
+   mkdir -p /usr/src/app; \
+   chown -R travis:travis /usr/src/app \
 )
 
 # throw errors if Gemfile has been modified since Gemfile.lock
-RUN bundle config --global frozen 1; \
- groupadd -r travis; \
- useradd -m -r -g travis travis; \
- mkdir -p /usr/src/app; \
- chown -R travis:travis /usr/src/app;
+RUN bundle config --global frozen 1;
 USER travis
 WORKDIR /usr/src/app
 
