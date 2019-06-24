@@ -22,7 +22,7 @@ COPY Gemfile       /usr/src/app
 COPY Gemfile.lock  /usr/src/app
 
 ARG bundle_gems__contribsys__com
-RUN bundle config https://gems.contribsys.com/ 09110f77:4b3b74a7 \
+RUN bundle config https://gems.contribsys.com/ $bundle_gems__contribsys__com \
       && bundle install --without test \
       && bundle config --delete https://gems.contribsys.com/
 
