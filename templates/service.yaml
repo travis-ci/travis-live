@@ -11,7 +11,7 @@ metadata:
     helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/instance: {{ .Release.Name }}
-  name: {{ template "travislive.fullname" . }}
+  name: {{ .Release.Name }}
   namespace: CHANGEME
 spec:
 # Provides options for the service so chart users have the full choice

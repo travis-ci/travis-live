@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "travislive.fullname" . }}
+  name: {{ .Release.Name }}-config
   namespace: CHANGEME
   labels:
     app: {{ template "travislive.name" . }}

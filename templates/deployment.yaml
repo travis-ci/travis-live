@@ -4,7 +4,7 @@ metadata:
   # This uses a "fullname" template (see _helpers)
   # Basing names on .Release.Name means that the same chart can be installed
   # multiple times into the same namespace.
-  name: {{ template "travislive.fullname" . }}
+  name: {{ .Release.Name }}
   namespace: CHANGEME
   labels:
     # The "app.kubernetes.io/managed-by" label is used to track which tool
@@ -48,15 +48,39 @@ spec:
               subPath: redis_wait.sh
       containers:
         - name: {{ template "travislive.name" . }}
-          image: "{{ .Values.image.rository }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
             - configMapRef:
-                name: {{ template "travislive.fullname" . }}
+              name: {{ .Release.Name }}-config
           ports:
             - name: http-live
               containerPort: 3000
               protocol: TCP
+          livenessProbe:
+            httpGet:
+            path: /
+            port: 3000
+            failureThreshold: 6
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+            path: /
+            port: 3000
+            failureThreshold: 6
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+          securityContext:
+            runAsUser: 1001
           # This (and the volumes section below) mount the config map as a volume.
           volumeMounts:
             - name: travis-config
@@ -68,6 +92,8 @@ spec:
             # users and avoids that charts don't run out of the box on, e. g.,
             # Minikube when high resource requests are specified by default.
             {{- toYaml .Values.resources | nindent 12 }}
+      securityContext:
+        fsGroup: 1001
       {{- if .Values.nodeSelector }}
       nodeSelector:
         # Node selectors can be important on mixed Windows/Linux clusters.

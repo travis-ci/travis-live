@@ -10,7 +10,7 @@ sleepyTime: "10"
 
 image: 
   repository: quay.io/travisci/travis-live
-  tag: 8321952
+  tag: "8321952"
   pullPolicy: IfNotPresent
 
 service:
