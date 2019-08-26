@@ -1,0 +1,13 @@
+name: travis-live
+description: A basic application of travis-live
+version: 1.0.0
+kubeVersion: ">=1.15.0"
+keywords:
+  - travis
+  - live
+home: https://github.com/helm/helm
+sources:
+  - https://hub.docker.com/_/nginx/
+maintainers:
+  - name: travis-ci
+    email: mbutcher@deis.com

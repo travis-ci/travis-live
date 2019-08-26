@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # This uses a "fullname" template (see _helpers)
+  # Basing names on .Release.Name means that the same chart can be installed
+  # multiple times into the same namespace.
+  name: {{ template "travislive.fullname" . }}
+  namespace: CHANGEME
+  labels:
+    # The "app.kubernetes.io/managed-by" label is used to track which tool
+    # deployed a given chart. It is useful for admins who want to see what
+    # releases a particular tool is responsible for.
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    # The "app.kubernetes.io/instance" convention makes it easy to tie a release
+    # to all of the Kubernetes resources that were created as part of that
+    # release.
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    # This makes it easy to audit chart usage.
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app.kubernetes.io/name: {{ template "travislive.name" . }}
+    app: {{ template "travislive.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "travislive.name" . }}
+      app.kubernetes.io/name: {{ template "travislive.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      {{- if .Values.podAnnotations }}
+      # Allows custom annotations to be specified
+      annotations:
+        {{- toYaml .Values.podAnnotations | nindent 8 }}
+      {{- end }}
+      labels:
+        app: {{ template "travislive.name" . }}
+        app.kubernetes.io/name: {{ template "travislive.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      initContainers:
+      - name: check-redis-ready
+        image: redis:5.0.4-alpine
+        command: ['sh', '/usr/local/bin/redis_wait.sh']
+        volumeMounts:
+            - name: redis-wait
+              mountPath: /usr/local/bin/redis_wait.sh
+              subPath: redis_wait.sh
+      containers:
+        - name: {{ template "travislive.name" . }}
+          image: "{{ .Values.image.rository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - configMapRef:
+                name: {{ template "travislive.fullname" . }}
+          ports:
+            - name: http-live
+              containerPort: 3000
+              protocol: TCP
+          # This (and the volumes section below) mount the config map as a volume.
+          volumeMounts:
+            - name: travis-config
+              mountPath: /usr/src/app/config/travis.yml
+              subPath: travis.yml
+          resources:
+            # Allow chart users to specify resources. Usually, no default should
+            # be set, so this is left to be a conscious choice to the chart
+            # users and avoids that charts don't run out of the box on, e. g.,
+            # Minikube when high resource requests are specified by default.
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+        # Node selectors can be important on mixed Windows/Linux clusters.
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: travis-config
+          configMap:
+            name: travis-config
+            items:
+              - key: travis.yml
+                path: travis.yml
+        - name: redis-wait
+          configMap:
+            name: redis-wait-config
+            items:
+              - key: redis_wait.sh
+                path: redis_wait.sh

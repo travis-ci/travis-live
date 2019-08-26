@@ -1,0 +1,16 @@
+# This is a simple config map to create travis-live application.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "travislive.fullname" . }}
+  namespace: CHANGEME
+  labels:
+    app: {{ template "travislive.name" . }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app.kubernetes.io/name: {{ template "travislive.name" . }}
+data:
+  RACK_ENV: "production"
+  ENV: "production"
+  PORT: "3000"
