@@ -1,6 +1,6 @@
 name: travis-live
 description: A basic application of travis-live
-version: 1.0.0
+version: 1.1.0
 kubeVersion: ">=1.15.0"
 keywords:
   - travis
