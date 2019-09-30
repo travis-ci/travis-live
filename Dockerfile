@@ -1,6 +1,6 @@
 FROM ruby:2.4.2
 
-LABEL maintainer Travis CI GmbH <support+travis-app-docker-images@travis-ci.com>
+LABEL maintainer Travis CI GmbH <support+travis-live-docker-images@travis-ci.com>
 
 # required for envsubst tool
 RUN ( \

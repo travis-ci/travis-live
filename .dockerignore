@@ -8,3 +8,5 @@ Dockerfile
 spec
 .DS_Store
 .gitignore
+#IDEs folders
+.idea
