@@ -7,6 +7,11 @@ rvm: 2.4.2
 before_install:
   - bundle config https://gems.contribsys.com/ $BUNDLE_GEMS__CONTRIBSYS__COM
 
+install:
+  - travis_retry gem install bundler -v '<2' # Ruby 2.2 depend on bundler 1.x.
+  - bundler -v
+  - travis_retry bundle install
+
 jobs:
   include:
     - stage: "testing time"
