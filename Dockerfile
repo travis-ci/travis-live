@@ -18,4 +18,4 @@ RUN bundle config https://gems.contribsys.com/ $bundle_gems__contribsys__com \
 # Copy app files into app folder
 COPY . /app
 
-CMD ["bundle", "exec", "je", "sidekiq", "-c 25", "-r ./lib/travis/live/pusher.rb", "-q pusher-live", "live"]
+CMD bundle exec je sidekiq -c 25 -r ./lib/travis/live/pusher.rb -q pusher-live live
