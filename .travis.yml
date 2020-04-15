@@ -2,7 +2,7 @@ language: ruby
 
 cache: bundler
 
-rvm: 2.4.2
+rvm: 2.4.9
 
 before_install:
   - bundle config https://gems.contribsys.com/ $BUNDLE_GEMS__CONTRIBSYS__COM
