@@ -8,7 +8,7 @@ before_install:
   - bundle config https://gems.contribsys.com/ $BUNDLE_GEMS__CONTRIBSYS__COM
 
 install:
-  - travis_retry gem install bundler -v '<2' # Ruby 2.2 depend on bundler 1.x.
+  - travis_retry gem install bundler -v 1.17.3
   - bundler -v
   - travis_retry bundle install
 
