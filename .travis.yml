@@ -2,13 +2,13 @@ language: ruby
 
 cache: bundler
 
-rvm: 2.4.2
+rvm: 2.4.9
 
 before_install:
   - bundle config https://gems.contribsys.com/ $BUNDLE_GEMS__CONTRIBSYS__COM
 
 install:
-  - travis_retry gem install bundler -v '<2' # Ruby 2.2 depend on bundler 1.x.
+  - gem install bundler:1.7.3
   - bundler -v
   - travis_retry bundle install
 
