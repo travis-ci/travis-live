@@ -7,4 +7,9 @@ rvm: 2.4.2
 before_install:
   - bundle config https://gems.contribsys.com/ $BUNDLE_GEMS__CONTRIBSYS__COM
 
+install:
+  - gem install bundler:1.16.6
+  - bundler -v
+  - travis_retry bundle install
+
 script: bundle exec rspec spec
