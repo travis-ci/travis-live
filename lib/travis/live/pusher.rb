@@ -47,7 +47,8 @@ Sidekiq.configure_server do |config|
 
   config.redis = {
     :url       => Travis.config.redis.url,
-    :namespace => Travis.config.sidekiq.namespace
+    :namespace => Travis.config.sidekiq.namespace,
+    :id        => nil
   }
   config.server_middleware do |chain|
     chain.add Travis::Metrics::Sidekiq
