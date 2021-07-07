@@ -24,7 +24,7 @@ jobs:
       addons:
         snaps:
         - name: docker
-          channel: latest/beta
+          channel: latest/stable
       language: ruby
       before_install: skip
       install: skip
