@@ -3,7 +3,7 @@ group: edge
 
 cache: bundler
 
-rvm: 2.4.9
+rvm: 2.7.5
 
 before_install:
   - bundle config https://gems.contribsys.com/ $BUNDLE_GEMS__CONTRIBSYS__COM
