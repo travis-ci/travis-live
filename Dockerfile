@@ -22,6 +22,8 @@ WORKDIR /app
 COPY Gemfile       /app
 COPY Gemfile.lock  /app
 
+RUN gem install bundler -v '2.3.7'
+
 ARG bundle_gems__contribsys__com
 RUN bundle config https://gems.contribsys.com/ $bundle_gems__contribsys__com \
       && bundle install --without test \
