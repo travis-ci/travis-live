@@ -18,7 +18,7 @@ gem 'redis', '~> 4.2.0'
 gem 'redis-namespace', '~> 1.8.1'
 gem 'rake', '~> 13.0.6'
 
-gem 'jemalloc', git: 'https://github.com/travis-ci/jemalloc-rb', branch: 'upgrade-rake'
+gem 'jemalloc', git: 'https://github.com/travis-ci/jemalloc-rb', branch: 'jemalloc-v-3-new-rake'
 
 gem 'sentry-raven'
 gem 'rollout',          github: 'jamesgolick/rollout', :ref => 'v1.1.0'
