@@ -1,4 +1,4 @@
-FROM ruby:2.4.9-slim
+FROM ruby:2.7.5-slim
 
 LABEL maintainer Travis CI GmbH <support+travis-live-docker-images@travis-ci.com>
 
@@ -21,6 +21,8 @@ WORKDIR /app
 
 COPY Gemfile       /app
 COPY Gemfile.lock  /app
+
+RUN gem install bundler -v '2.3.7'
 
 ARG bundle_gems__contribsys__com
 RUN bundle config https://gems.contribsys.com/ $bundle_gems__contribsys__com \

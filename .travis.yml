@@ -3,9 +3,11 @@ group: edge
 
 cache: bundler
 
-rvm: 2.4.9
+rvm: 2.7.5
 
 before_install:
+  - gem uninstall -v '>=2' -i $(rvm gemdir)@global -ax bundler || true
+  - gem install bundler -v '2.3.7'
   - bundle config https://gems.contribsys.com/ $BUNDLE_GEMS__CONTRIBSYS__COM
 
 install:
