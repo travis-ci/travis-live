@@ -154,7 +154,7 @@ GEM
     thread_safe (0.3.6)
     travis-config (1.0.13)
       hashr (~> 2.0.0)
-    tzinfo (1.2.9)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     webmock (1.8.11)
       addressable (>= 2.2.7)
