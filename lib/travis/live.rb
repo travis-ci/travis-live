@@ -1,4 +1,4 @@
-require "travis/live/version"
+require 'travis/live/version'
 
 module Travis
   module Live

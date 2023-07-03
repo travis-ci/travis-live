@@ -43,74 +43,72 @@ module Travis
         def channels
           channels = user_ids.map { |id| "private-user-#{id}" }
 
-          if public_channels?
-            channels << "repo-#{repo_id}"
-          end
+          channels << "repo-#{repo_id}" if public_channels?
 
           channels
         end
 
         private
 
-          def process
-            payload_to_process = prepare_payload(payload)
-            channels.each_slice(10) { |channels_part| trigger(channels_part, payload_to_process) }
-          end
+        def process
+          payload_to_process = prepare_payload(payload)
+          channels.each_slice(10) { |channels_part| trigger(channels_part, payload_to_process) }
+        end
 
-          def prepare_payload(payload)
-            encoded_payload = MultiJson.encode(payload)
-            if encoded_payload.length > 10_000
-              if type == 'job'
-                { id: payload[:id], build_id: payload[:build_id], _no_full_payload: true }
-              elsif type == 'build'
-                { build: { id: payload[:build][:id]  }, _no_full_payload: true }
-              else
-                payload
-              end
+        def prepare_payload(payload)
+          encoded_payload = MultiJson.encode(payload)
+          if encoded_payload.length > 10_000
+            if type == 'job'
+              { id: payload[:id], build_id: payload[:build_id], _no_full_payload: true }
+            elsif type == 'build'
+              { build: { id: payload[:build][:id] }, _no_full_payload: true }
             else
               payload
             end
+          else
+            payload
           end
+        end
 
-          def trigger(channels, payload)
-            Travis.pusher.trigger(channels, client_event, payload)
-          rescue ::Pusher::Error => e
-            Travis.logger.error("[addons:pusher] Could not send event due to Pusher::Error: #{e.message}, event=#{client_event}, payload: #{payload.inspect}")
-            raise
-          end
+        def trigger(channels, payload)
+          Travis.pusher.trigger(channels, client_event, payload)
+        rescue ::Pusher::Error => e
+          Travis.logger.error("[addons:pusher] Could not send event due to Pusher::Error: #{e.message}, event=#{client_event}, payload: #{payload.inspect}")
+          raise
+        end
 
-          def job_id
-            payload[:id]
-          end
+        def job_id
+          payload[:id]
+        end
 
-          def repo_id
-            # TODO api v1 is inconsistent here
-            payload.key?(:repository) ? payload[:repository][:id] : payload[:repository_id]
-          end
+        def repo_id
+          # TODO: api v1 is inconsistent here
+          payload.key?(:repository) ? payload[:repository][:id] : payload[:repository_id]
+        end
 
-          def channel_prefix
-            'private' if private_channels?
-          end
+        def channel_prefix
+          'private' if private_channels?
+        end
 
-          def private_channels?
-            force_private_channels? || repository_private?
-          end
+        def private_channels?
+          force_private_channels? || repository_private?
+        end
 
-          def public_channels?
-            !private_channels?
-          end
+        def public_channels?
+          !private_channels?
+        end
 
-          def force_private_channels?
-            Travis.config.pusher.secure?
-          end
+        def force_private_channels?
+          Travis.config.pusher.secure?
+        end
 
-          def repository_private?
-            payload.key?(:repository) ? payload[:repository][:private] : payload[:repository_private]
-          end
+        def repository_private?
+          payload.key?(:repository) ? payload[:repository][:private] : payload[:repository_private]
+        end
 
-          def timeout(options = { after: 60 }, &block)
-            Timeout::timeout(options[:after], &block)
-          end
+        def timeout(options = { after: 60 }, &block)
+          Timeout.timeout(options[:after], &block)
+        end
       end
     end
   end

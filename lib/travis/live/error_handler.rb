@@ -3,14 +3,12 @@ require 'raven'
 module Travis
   module Live
     class ErrorHandler
-      def call(worker, job, queue)
+      def call(_worker, job, _queue)
         yield
-      rescue => ex
-        Sidekiq.logger.warn(ex)
+      rescue StandardError => e
+        Sidekiq.logger.warn(e)
 
-        if Travis.config.sentry.any?
-          Raven.capture_exception(ex, extra: {sidekiq: job})
-        end
+        Raven.capture_exception(e, extra: { sidekiq: job }) if Travis.config.sentry.any?
 
         raise
       end

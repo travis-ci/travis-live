@@ -20,18 +20,18 @@ module Travis
   module Live
     class Config < Travis::Config
       HOSTS = {
-        :production  => 'travis-ci.org',
-        :staging     => 'staging.travis-ci.org',
-        :development => 'localhost:3000'
+        production: 'travis-ci.org',
+        staging: 'staging.travis-ci.org',
+        development: 'localhost:3000'
       }
 
-      define host:    "travis-ci.org",
-             redis:   { url: "redis://localhost:6379" },
-             sentry:  { },
+      define host: 'travis-ci.org',
+             redis: { url: 'redis://localhost:6379' },
+             sentry: {},
              metrics: { reporter: 'librato' },
-             sidekiq: { namespace: "sidekiq", pool_size: 3 },
-             ssl:     { },
-             pusher:  { }
+             sidekiq: { namespace: 'sidekiq', pool_size: 3 },
+             ssl: {},
+             pusher: {}
 
       default _access: [:key]
 
