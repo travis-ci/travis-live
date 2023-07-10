@@ -6,9 +6,9 @@ gem 'sidekiq-pro', source: 'https://gems.contribsys.com'
 
 gem 'activesupport',     '~> 4.2.5'
 gem 'travis-config',     '~> 1.0.3'
-gem 'travis-exceptions', github: 'travis-ci/travis-exceptions'
-gem 'travis-support',    github: 'travis-ci/travis-support'
-gem 'travis-metrics',    github: 'travis-ci/travis-metrics'
+gem 'travis-exceptions', git: 'https://github.com/travis-ci/travis-exceptions'
+gem 'travis-support',    git: 'https://github.com/travis-ci/travis-support'
+gem 'travis-metrics',    git: 'https://github.com/travis-ci/travis-metrics'
 
 gem 'metriks',                 git: 'https://github.com/travis-ci/metriks'
 gem 'metriks-librato_metrics', git: 'https://github.com/travis-ci/metriks-librato_metrics'
@@ -18,7 +18,7 @@ gem 'redis-namespace'
 gem 'jemalloc'
 
 gem 'sentry-raven'
-gem 'rollout',          github: 'jamesgolick/rollout', :ref => 'v1.1.0'
+gem 'rollout',          git: 'https://github.com/fetlife/rollout', ref: 'v1.1.0'
 gem 'multi_json'
 gem 'pusher',           '~> 0.15.1'
 

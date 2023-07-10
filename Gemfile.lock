@@ -1,26 +1,26 @@
 GIT
-  remote: git://github.com/jamesgolick/rollout.git
+  remote: https://github.com/fetlife/rollout
   revision: 3e7312cc018061b1ac6a8aeb9f11bbd0331da889
   ref: v1.1.0
   specs:
     rollout (1.1.0)
 
 GIT
-  remote: git://github.com/travis-ci/travis-exceptions.git
+  remote: https://github.com/travis-ci/travis-exceptions
   revision: ab236981f810b820bc3ebfaf33f317bbaa9b3465
   specs:
     travis-exceptions (0.0.2)
       sentry-raven
 
 GIT
-  remote: git://github.com/travis-ci/travis-metrics.git
+  remote: https://github.com/travis-ci/travis-metrics
   revision: ce620aecdf179ea82280872ec56aa3095a2e59a5
   specs:
     travis-metrics (2.0.0)
       metriks-librato_metrics (~> 1.0)
 
 GIT
-  remote: git://github.com/travis-ci/travis-support.git
+  remote: https://github.com/travis-ci/travis-support
   revision: 113cff17fe383bb72fcfae3a97a8ce98c228342f
   specs:
     travis-support (0.0.1)
