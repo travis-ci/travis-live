@@ -1,4 +1,6 @@
-$:.unshift(File.expand_path('../..', File.dirname(__FILE__)))
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.expand_path('../..', File.dirname(__FILE__)))
 
 require 'metriks/librato_metrics_reporter'
 require 'travis/live/config'
@@ -18,7 +20,7 @@ module Travis
     end
 
     def logger
-      @logger ||= Logger.configure(Logger.new(STDOUT))
+      @_logger ||= Logger.configure(Logger.new($stdout))
     end
 
     def logger=(logger)

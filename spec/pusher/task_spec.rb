@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
-describe Travis::Live::Pusher::Task do
+describe Travis::Live::Pusher::Task do # rubocop:disable Metrics/BlockLength
   let(:payload) do
     { 'id' => 430_969,
       'repository_id' => 16_594,
@@ -29,7 +31,7 @@ describe Travis::Live::Pusher::Task do
 
   let(:params) { { 'event' => 'job:test:started' } }
 
-  describe 'trigger' do
+  describe 'trigger' do # rubocop:disable Metrics/BlockLength
     it 'assigns the correct channels' do
       task = Travis::Live::Pusher::Task.new(payload, params)
       task.channels.should == ['repo-16594']

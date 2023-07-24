@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'metriks'
 
 module Travis
@@ -37,7 +39,7 @@ module Travis
         end
 
         def client_event
-          @client_event ||= (event =~ /job:.*/ ? event.gsub(/(test|configure):/, '') : event)
+          @_client_event ||= (/job:.*/.match?(event) ? event.gsub(/(test|configure):/, '') : event)
         end
 
         def channels

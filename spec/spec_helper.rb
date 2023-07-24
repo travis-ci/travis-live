@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.configure do |c|
   c.before(:each) { Time.now.utc.tap { |now| Time.stubs(:now).returns(now) } }
 end

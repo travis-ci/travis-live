@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 require 'active_support/core_ext/benchmark'
 
 module Travis
   module Live
     module Middleware
       class Logging
-        def call(_worker, message, queue, &block)
+        def call(_worker, message, queue, &block) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
           time = Benchmark.ms(&block)
         ensure
           uuid, _, _, payload, params = *message['args']
-          data = {}.tap do |data|
+          out_data = {}.tap do |data|
             data['type'] = queue
             if payload['build']
               data['build'] = payload['build']['id']
@@ -24,7 +26,7 @@ module Travis
             data['time'] = format('%.3f', (time / 1000)) if time
             data['jid'] = message['jid']
           end
-          log(data)
+          log(out_data)
         end
 
         def log(data)
