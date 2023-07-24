@@ -7,13 +7,13 @@ ruby '3.2.2'
 gem 'sidekiq-pro', source: 'https://gems.contribsys.com'
 
 gem 'activesupport', '~> 7'
-gem 'travis-config', path: '~/tmp/travis-config' # '~> 1.0.3'
-gem 'travis-exceptions', path: '~/tmp/travis-exceptions' # github: 'travis-ci/travis-exceptions'
-gem 'travis-metrics',    path: '~/tmp/travis-metrics' # github: 'travis-ci/travis-metrics'
-gem 'travis-support',    path: '~/tmp/travis-support' # github: 'travis-ci/travis-support'
+gem 'travis-config', git: 'https://github.com/travis-ci/travis-config', branch: 'prd-ruby-upgrade-dev'
+gem 'travis-exceptions', git: 'https://github.com/travis-ci/travis-exceptions', branch: 'prd-ruby-upgrade-dev'
+gem 'travis-metrics',    git: 'https://github.com/travis-ci/travis-metrics', branch: 'prd-ruby-upgrade-dev'
+gem 'travis-support',   git: 'https://github.com/travis-ci/travis-support', branch: 'prd-ruby-upgrade-dev'
 
-gem 'metriks',                 git: 'https://github.com/travis-ci/metriks'
-gem 'metriks-librato_metrics', git: 'https://github.com/travis-ci/metriks-librato_metrics'
+gem 'metriks',                 git: 'https://github.com/travis-ci/metriks', branch: 'prd-ruby-upgrade-dev'
+gem 'metriks-librato_metrics', git: 'https://github.com/travis-ci/metriks-librato_metrics', branch: 'prd-ruby-upgrade-dev'
 
 gem 'redis-namespace'
 
@@ -21,7 +21,7 @@ gem 'jemalloc'
 
 gem 'multi_json'
 gem 'pusher', '~> 2.0.3'
-gem 'rollout', github: 'jamesgolick/rollout', ref: 'v1.1.0'
+gem 'rollout', git: 'https://github.com/travis-ci/rollout', branch: 'prd-ruby-upgrade-dev'
 gem 'sentry-ruby'
 
 group :development, :test do

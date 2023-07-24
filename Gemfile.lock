@@ -1,47 +1,57 @@
 GIT
-  remote: https://github.com/jamesgolick/rollout.git
-  revision: 3e7312cc018061b1ac6a8aeb9f11bbd0331da889
-  ref: v1.1.0
-  specs:
-    rollout (1.1.0)
-
-GIT
   remote: https://github.com/travis-ci/metriks
-  revision: 5c9eec24144492071dad6e20f24c03f8424d041d
+  revision: 6292ce11b8d22888bd9947b9f38d104834268fa7
+  branch: prd-ruby-upgrade-dev
   specs:
     metriks (0.9.9.8)
-      HDRHistogram (= 0.1.9)
+      HDRHistogram (~> 0.1)
       atomic (~> 1.0)
-      avl_tree (~> 1.2.0)
-      hitimes (~> 1.1)
+      avl_tree (~> 1.2)
+      hitimes (~> 1.3)
 
 GIT
   remote: https://github.com/travis-ci/metriks-librato_metrics
-  revision: 7ec1c97f4f6f783d2a04c7922baac98a9fbbba25
+  revision: 41aca2ed2ab40ecdc1dbebabf70e35a38377d101
+  branch: prd-ruby-upgrade-dev
   specs:
     metriks-librato_metrics (1.0.6)
-      metriks (>= 0.9.9.6)
 
-PATH
-  remote: ../travis-config
+GIT
+  remote: https://github.com/travis-ci/rollout
+  revision: 3907bb9cf1774e81b38ee434624b0402bc93f2ff
+  branch: prd-ruby-upgrade-dev
+  specs:
+    rollout (2.5.0)
+      redis (~> 5.0)
+
+GIT
+  remote: https://github.com/travis-ci/travis-config
+  revision: f02604a813cce3a672ae89cd7e4adaa30b001532
+  branch: prd-ruby-upgrade-dev
   specs:
     travis-config (1.1.5)
       hashr (~> 2.0)
 
-PATH
-  remote: ../travis-exceptions
+GIT
+  remote: https://github.com/travis-ci/travis-exceptions
+  revision: d7ee239df46a148c6c4e286bb74e1297bb39b9ac
+  branch: prd-ruby-upgrade-dev
   specs:
     travis-exceptions (0.0.2)
-      sentry-raven
+      sentry-ruby
 
-PATH
-  remote: ../travis-metrics
+GIT
+  remote: https://github.com/travis-ci/travis-metrics
+  revision: 45579421778d855a6c0cfe926d2f724f48cf6bc8
+  branch: prd-ruby-upgrade-dev
   specs:
     travis-metrics (2.0.0)
       metriks-librato_metrics (~> 1.0)
 
-PATH
-  remote: ../travis-support
+GIT
+  remote: https://github.com/travis-ci/travis-support
+  revision: 77f8dad236002e6103cfdb796308e1a11d8d441e
+  branch: prd-ruby-upgrade-dev
   specs:
     travis-support (0.0.1)
 
@@ -54,7 +64,7 @@ GEM
 GEM
   remote: https://rubygems.org/
   specs:
-    HDRHistogram (0.1.9)
+    HDRHistogram (0.1.11)
     activesupport (7.0.6)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
@@ -74,10 +84,6 @@ GEM
       rexml
     diff-lcs (1.5.0)
     docile (1.4.0)
-    faraday (2.7.9)
-      faraday-net_http (>= 2.0, < 3.1)
-      ruby2_keywords (>= 0.0.4)
-    faraday-net_http (3.0.2)
     ffi (1.15.5)
     foreman (0.87.2)
     formatador (1.1.0)
@@ -107,7 +113,7 @@ GEM
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    lumberjack (1.2.8)
+    lumberjack (1.2.9)
     method_source (1.0.0)
     minitest (5.18.1)
     mocha (2.0.4)
@@ -124,7 +130,7 @@ GEM
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    public_suffix (5.0.1)
+    public_suffix (5.0.3)
     pusher (2.0.3)
       httpclient (~> 2.8)
       multi_json (~> 1.15)
@@ -153,11 +159,11 @@ GEM
     rspec-expectations (3.12.3)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
-    rspec-mocks (3.12.5)
+    rspec-mocks (3.12.6)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
     rspec-support (3.12.1)
-    rubocop (1.54.0)
+    rubocop (1.54.2)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -183,9 +189,7 @@ GEM
       rubocop-factory_bot (~> 2.22)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
-    sentry-raven (3.1.2)
-      faraday (>= 1.0)
-    sentry-ruby (5.9.0)
+    sentry-ruby (5.10.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
     shellany (0.0.1)
     sidekiq (7.1.2)
