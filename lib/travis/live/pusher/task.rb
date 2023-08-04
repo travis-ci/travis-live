@@ -15,6 +15,7 @@ module Travis
         attr_reader :payload, :params
 
         def initialize(payload, params = {})
+          payload = JSON.parse(payload) if payload.is_a?(String)
           @payload = payload.deep_symbolize_keys
           @params  = params.deep_symbolize_keys
         end

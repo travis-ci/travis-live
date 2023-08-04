@@ -15,10 +15,6 @@ gem 'travis-support',   git: 'https://github.com/travis-ci/travis-support', bran
 gem 'metriks',                 git: 'https://github.com/travis-ci/metriks', branch: 'prd-ruby-upgrade-dev'
 gem 'metriks-librato_metrics', git: 'https://github.com/travis-ci/metriks-librato_metrics', branch: 'prd-ruby-upgrade-dev'
 
-gem 'redis-namespace'
-
-gem 'jemalloc'
-
 gem 'multi_json'
 gem 'pusher', '~> 2.0.3'
 gem 'rollout', git: 'https://github.com/travis-ci/rollout', branch: 'prd-ruby-upgrade-dev'

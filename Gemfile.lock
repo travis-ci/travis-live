@@ -107,7 +107,6 @@ GEM
     httpclient (2.8.3)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
-    jemalloc (1.0.1)
     json (2.6.3)
     language_server-protocol (3.17.0.3)
     listen (3.8.0)
@@ -146,8 +145,6 @@ GEM
       redis-client (>= 0.9.0)
     redis-client (0.15.0)
       connection_pool
-    redis-namespace (1.11.0)
-      redis (>= 4)
     regexp_parser (2.8.1)
     rexml (3.2.6)
     rspec (3.12.0)
@@ -226,13 +223,11 @@ DEPENDENCIES
   foreman
   guard
   guard-rspec
-  jemalloc
   metriks!
   metriks-librato_metrics!
   mocha (~> 2.0.4)
   multi_json
   pusher (~> 2.0.3)
-  redis-namespace
   rollout!
   rspec (~> 3.12.0)
   rubocop
