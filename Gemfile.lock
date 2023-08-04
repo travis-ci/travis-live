@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: https://github.com/travis-ci/travis-config
-  revision: f02604a813cce3a672ae89cd7e4adaa30b001532
+  revision: d6b678fb17b242508fa4e061ff7b01cae3b08996
   branch: prd-ruby-upgrade-dev
   specs:
     travis-config (1.1.5)
@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: https://github.com/travis-ci/travis-exceptions
-  revision: d7ee239df46a148c6c4e286bb74e1297bb39b9ac
+  revision: 9bcf5989b9a6444a8a954540c26ba9fd4fd2ee85
   branch: prd-ruby-upgrade-dev
   specs:
     travis-exceptions (0.0.2)
@@ -42,7 +42,7 @@ GIT
 
 GIT
   remote: https://github.com/travis-ci/travis-metrics
-  revision: 45579421778d855a6c0cfe926d2f724f48cf6bc8
+  revision: c776366d7182829da5abf9e48b42c416249a0043
   branch: prd-ruby-upgrade-dev
   specs:
     travis-metrics (2.0.0)
@@ -70,7 +70,7 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-    addressable (2.8.4)
+    addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
     ansi (1.5.0)
     ast (2.4.2)
@@ -115,7 +115,7 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.10)
     lumberjack (1.2.9)
     method_source (1.0.0)
-    minitest (5.18.1)
+    minitest (5.19.0)
     mocha (2.0.4)
       ruby2_keywords (>= 0.0.5)
     multi_json (1.15.0)
@@ -144,12 +144,12 @@ GEM
       ffi (~> 1.0)
     redis (5.0.6)
       redis-client (>= 0.9.0)
-    redis-client (0.14.1)
+    redis-client (0.15.0)
       connection_pool
     redis-namespace (1.11.0)
       redis (>= 4)
     regexp_parser (2.8.1)
-    rexml (3.2.5)
+    rexml (3.2.6)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
       rspec-expectations (~> 3.12.0)
@@ -163,7 +163,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
     rspec-support (3.12.1)
-    rubocop (1.54.2)
+    rubocop (1.55.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -171,7 +171,7 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.28.0, < 2.0)
+      rubocop-ast (>= 1.28.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.29.0)
@@ -183,7 +183,7 @@ GEM
     rubocop-performance (1.18.0)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    rubocop-rspec (2.22.0)
+    rubocop-rspec (2.23.0)
       rubocop (~> 1.33)
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
@@ -252,4 +252,4 @@ RUBY VERSION
    ruby 3.2.2p53
 
 BUNDLED WITH
-   2.4.14
+   2.4.17
