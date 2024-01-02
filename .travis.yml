@@ -5,6 +5,7 @@ cache: bundler
 rvm: 2.4.9
 
 before_install:
+  - gem install rubygems-update -v 3.4.22
   - bundle config https://gems.contribsys.com/ $BUNDLE_GEMS__CONTRIBSYS__COM
 
 install:
