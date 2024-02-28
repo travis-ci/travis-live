@@ -1,4 +1,6 @@
-$:.unshift(File.expand_path('../..', File.dirname(__FILE__)))
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.expand_path('../..', File.dirname(__FILE__)))
 
 require 'metriks/librato_metrics_reporter'
 require 'travis/live/config'
@@ -14,11 +16,11 @@ require 'sidekiq-pro'
 module Travis
   class << self
     def env
-     ENV['ENV'] || ENV['RAILS_ENV'] || ENV['RACK_ENV'] || 'development'
+      ENV['ENV'] || ENV['RAILS_ENV'] || ENV['RACK_ENV'] || 'development'
     end
 
     def logger
-      @logger ||= Logger.configure(Logger.new(STDOUT))
+      @_logger ||= Logger.configure(Logger.new($stdout))
     end
 
     def logger=(logger)
@@ -46,22 +48,17 @@ Sidekiq.configure_server do |config|
   end
 
   config.redis = {
-    :url       => Travis.config.redis.url,
-    :namespace => Travis.config.sidekiq.namespace,
-    :id        => nil
+    url: Travis.config.redis.url,
+    id: nil
   }
   config.server_middleware do |chain|
     chain.add Travis::Metrics::Sidekiq
     chain.add Travis::Live::Middleware::Logging
 
-    if Travis.config.sentry
-      chain.add Travis::Exceptions::Sidekiq
-    end
+    chain.add Travis::Exceptions::Sidekiq if Travis.config.sentry
   end
 end
 
-if Travis.config.sentry
-  Travis::Exceptions.setup(Travis.config, Travis.config.env, Travis.logger)
-end
+Travis::Exceptions.setup(Travis.config, Travis.config.env, Travis.logger) if Travis.config.sentry
 
 Travis::Metrics.setup(Travis.config.metrics, Travis.logger)
