@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sidekiq'
 require 'travis/live/pusher/task'
 
@@ -9,7 +11,7 @@ module Travis
 
         sidekiq_options dead: false
 
-        def perform(uuid, target, method, payload, params)
+        def perform(_uuid, _target, _method, payload, params)
           Travis::Live::Pusher::Task.new(payload, params).run
         end
       end

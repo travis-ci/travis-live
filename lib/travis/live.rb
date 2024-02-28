@@ -1,4 +1,6 @@
-require "travis/live/version"
+# frozen_string_literal: true
+
+require 'travis/live/version'
 
 module Travis
   module Live
