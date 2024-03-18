@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 ruby '3.2.2'
 
 gem 'sidekiq-pro', source: 'https://gems.contribsys.com'
-gem 'sidekiq', '~> 6.4.0'
+gem 'sidekiq', '~> 7.2.0'
 
 gem 'activesupport', '~> 7'
 gem 'travis-config', git: 'https://github.com/travis-ci/travis-config'
@@ -16,14 +16,13 @@ gem 'travis-support',   git: 'https://github.com/travis-ci/travis-support'
 gem 'metriks',                 git: 'https://github.com/travis-ci/metriks'
 gem 'metriks-librato_metrics', git: 'https://github.com/travis-ci/metriks-librato_metrics'
 
-gem 'redis', '~> 4.2.0'
-gem 'redis-namespace', '~> 1.8.1'
+gem 'redis'
+gem 'redis-namespace'
 gem 'rake', '~> 13.0.6'
 
 gem 'jemalloc', git: 'https://github.com/travis-ci/jemalloc-rb', branch: 'jemalloc-v-3-new-rake'
 
 gem 'sentry-raven'
-gem 'rollout',          github: 'jamesgolick/rollout', :ref => 'v1.1.0'
 gem 'multi_json'
 gem 'pusher', '~> 2.0.3'
 gem 'rollout', git: 'https://github.com/travis-ci/rollout'
