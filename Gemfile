@@ -22,7 +22,6 @@ gem 'rake', '~> 13.0.6'
 
 gem 'jemalloc', git: 'https://github.com/travis-ci/jemalloc-rb', branch: 'jemalloc-v-3-new-rake'
 
-gem 'sentry-raven'
 gem 'multi_json'
 gem 'pusher', '~> 2.0.3'
 gem 'rollout', git: 'https://github.com/travis-ci/rollout'
