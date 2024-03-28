@@ -22,6 +22,7 @@ jobs:
     - stage: "testing time"
       script: bundle exec rspec spec
     - stage: ":ship: it to quay.io"
+      dist: focal
       language: ruby
       before_install: skip
       install: skip
