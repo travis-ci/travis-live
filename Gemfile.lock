@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/travis-ci/jemalloc-rb
-  revision: af46aa864c867dbd2ad62b036401dba7b16dffd5
+  revision: 1568ca3fefcfff2a0f9094c0e3ffbaba7f73c0ad
   branch: jemalloc-v-3-new-rake
   specs:
     jemalloc (1.1.3)
