@@ -2,6 +2,10 @@ source 'https://rubygems.org'
 
 ruby '2.7.5'
 
+def gh(slug)
+  "https://github.com/#{slug}"
+end
+
 gem 'sidekiq-pro', source: 'https://gems.contribsys.com'
 gem 'sidekiq', '~> 6.4.0'
 
@@ -14,11 +18,11 @@ gem 'travis-metrics',    github: 'travis-ci/travis-metrics'
 gem 'metriks',                 git: 'https://github.com/travis-ci/metriks'
 gem 'metriks-librato_metrics', git: 'https://github.com/travis-ci/metriks-librato_metrics'
 
-gem 'redis', '~> 4.2.0'
+gem 'redis', '~> 4.3.0'
 gem 'redis-namespace', '~> 1.8.1'
 gem 'rake', '~> 13.0.6'
 
-gem 'jemalloc', git: 'https://github.com/travis-ci/jemalloc-rb', branch: 'jemalloc-v-3-new-rake'
+gem 'jemalloc', git: gh('travis-ci/jemalloc-rb')
 
 gem 'sentry-raven'
 gem 'rollout',          github: 'jamesgolick/rollout', :ref => 'v1.1.0'
