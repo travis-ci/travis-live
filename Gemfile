@@ -14,7 +14,7 @@ gem 'travis-metrics',    github: 'travis-ci/travis-metrics'
 gem 'metriks',                 git: 'https://github.com/travis-ci/metriks'
 gem 'metriks-librato_metrics', git: 'https://github.com/travis-ci/metriks-librato_metrics'
 
-gem 'redis', '~> 4.2.0'
+gem 'redis', '~> 4.3.0'
 gem 'redis-namespace', '~> 1.8.1'
 gem 'rake', '~> 13.0.6'
 
