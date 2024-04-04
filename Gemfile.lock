@@ -124,7 +124,7 @@ GEM
     rb-fsevent (0.10.2)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    redis (4.2.5)
+    redis (4.3.1)
     redis-namespace (1.8.1)
       redis (>= 3.0.4)
     rspec (2.14.1)
@@ -172,7 +172,7 @@ DEPENDENCIES
   multi_json
   pusher (~> 0.15.1)
   rake (~> 13.0.6)
-  redis (~> 4.2.0)
+  redis (~> 4.3.0)
   redis-namespace (~> 1.8.1)
   rollout!
   rspec (~> 2.14.0)
