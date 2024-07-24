@@ -1,4 +1,5 @@
 language: ruby
+group: edge
 
 cache: bundler
 
@@ -12,11 +13,6 @@ install:
   - bundler -v
   - travis_retry bundle install
 
-addons:
-  snaps:
-  - name: docker
-    channel: latest/beta
-
 env:
   global:
     - PATH=/snap/bin:$PATH
@@ -26,8 +22,10 @@ jobs:
     - stage: "testing time"
       script: bundle exec rspec spec
     - stage: ":ship: it to quay.io"
+      dist: focal
       language: ruby
       before_install: skip
       install: skip
       script: make ship
       if: (branch = master and type = push ) OR commit_message =~ /ship:docker/ OR env(SHIP_DOCKER) = true
+
