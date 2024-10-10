@@ -10,12 +10,9 @@ module Travis
           time = Benchmark.ms(&block)
         ensure
           uuid, _, _, payload, params = *message['args']
-          if payload.is_a?(Array) && payload.length > 0
-            payload = payload[0]
-            params = params[0]
-          end
-          payload = JSON.parse(payload) if payload.is_a?(String) && payload.length > 0
-          params = JSON.parse(params) if params.is_a?(String) && params.length > 0
+          payload = parse(payload)
+          params = parse(params)
+
           out_data = {}.tap do |data|
             data['type'] = queue
             if payload['build']
@@ -43,6 +40,16 @@ module Travis
           line << " jid=#{data['jid']}"
           line << " time=#{data['time']}" if data['time']
           Travis.logger.info(line)
+        end
+
+        def parse(input)
+          if input.is_a?(Array) && input.length > 0
+            input[0]
+          elsif input.is_a?(String) && input.length > 0
+            JSON.parse(input)
+          else
+            {}
+          end
         end
       end
     end
