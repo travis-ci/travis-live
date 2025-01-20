@@ -28,7 +28,7 @@ module Travis
       }.freeze
 
       define host: 'travis-ci.org',
-             redis: { url: 'redis://localhost:6379' },
+             redis: { url: 'redis://localhost:6379', ssl: ENV['REDIS_SSL'] || false },
              sentry: {},
              metrics: { reporter: 'librato' },
              sidekiq: { pool_size: 3 },
