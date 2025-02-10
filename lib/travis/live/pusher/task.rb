@@ -26,6 +26,10 @@ module Travis
           timeout after: params[:timeout] || 60 do
             process
           end
+        rescue => e
+          puts "Travis::Live::Pusher::Task#run failed: #{e.message}"
+          puts(e.backtrace.join("\n"))
+          raise
         end
 
         def event
@@ -77,7 +81,7 @@ module Travis
         def trigger(channels, payload)
           Travis.pusher.trigger(channels, client_event, payload)
         rescue ::Pusher::Error => e
-          Travis.logger.error("[addons:pusher] Could not send event due to Pusher::Error: #{e.message}, event=#{client_event}, payload: #{payload.inspect}")
+          puts("[addons:pusher] Could not send event due to Pusher::Error: #{e.message}, event=#{client_event}, payload: #{payload.inspect}")
           raise
         end
 
