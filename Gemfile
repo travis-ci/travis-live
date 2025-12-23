@@ -5,9 +5,11 @@ source 'https://rubygems.org'
 ruby '3.2.2'
 
 gem 'sidekiq-pro', source: 'https://gems.contribsys.com'
-gem 'sidekiq', '~> 7.2.0'
+gem 'sidekiq', '~> 7.2.4'
 
 gem 'activesupport', '~> 7'
+gem 'rack', '~> 3.1.18'
+gem 'rexml', '>= 3.3.9'
 gem 'travis-config', git: 'https://github.com/travis-ci/travis-config'
 gem 'travis-exceptions', git: 'https://github.com/travis-ci/travis-exceptions'
 gem 'travis-metrics',    git: 'https://github.com/travis-ci/travis-metrics'
