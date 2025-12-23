@@ -146,7 +146,7 @@ GEM
       pusher-signature (~> 0.1.8)
     pusher-signature (0.1.8)
     racc (1.7.3)
-    rack (3.0.9.1)
+    rack (3.1.19)
     rainbow (3.1.1)
     rake (13.0.6)
     rb-fsevent (0.11.2)
@@ -159,7 +159,7 @@ GEM
     redis-namespace (1.11.0)
       redis (>= 4)
     regexp_parser (2.9.0)
-    rexml (3.2.6)
+    rexml (3.4.4)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
       rspec-expectations (~> 3.12.0)
@@ -203,7 +203,7 @@ GEM
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
     shellany (0.0.1)
-    sidekiq (7.2.2)
+    sidekiq (7.2.4)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
@@ -230,6 +230,7 @@ GEM
       hashdiff (>= 0.4.0, < 2.0.0)
 
 PLATFORMS
+  arm64-darwin-21
   x86_64-linux
 
 DEPENDENCIES
@@ -243,16 +244,18 @@ DEPENDENCIES
   mocha (~> 2.0.4)
   multi_json
   pusher (~> 2.0.3)
+  rack (~> 3.1.18)
   rake (~> 13.0.6)
   redis
   redis-namespace
+  rexml (>= 3.3.9)
   rollout!
   rspec (~> 3.12.0)
   rubocop
   rubocop-performance
   rubocop-rspec
   sentry-ruby
-  sidekiq (~> 7.2.0)
+  sidekiq (~> 7.2.4)
   sidekiq-pro!
   simplecov
   simplecov-console
